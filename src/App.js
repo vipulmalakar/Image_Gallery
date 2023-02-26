@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,createContext} from 'react';
+import Home from './pages/Home';
+import useAxios from './hooks/useAxios';
+
+export const AppContext = createContext();
 
 function App() {
+  const {response, isLoading, error, fetchData} = useAxios(`search/photos?page=1&query=office&client_id=${process.env.REACT_APP_ACCESS_KEY}`)
+  const [dark, setDark] = useState(0);
+
+  const value = {
+    response,
+    isLoading,
+    error,
+    fetchData,
+    dark,
+    setDark
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={value}>
+      <Home />
+    </AppContext.Provider>
   );
 }
 
