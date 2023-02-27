@@ -10,7 +10,11 @@ const Header = () => {
 
     const handleInputChange = (e) => {
         setSearchValue(e.target.value);
-        fetchData(`search/photos?page=1&query=${searchValue}&client_id=${process.env.REACT_APP_ACCESS_KEY}`)
+        if (e.target.value === "") {
+            fetchData(`search/photos?page=1&query=office&client_id=${process.env.REACT_APP_ACCESS_KEY}`);
+        } else {
+            fetchData(`search/photos?page=1&query=${searchValue}&client_id=${process.env.REACT_APP_ACCESS_KEY}`)
+        }
     }
   return (
     <StyledHeader dark={dark}>
