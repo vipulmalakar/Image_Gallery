@@ -37,7 +37,7 @@ const StyledItem = styled.div`
     margin-bottom: 2rem;
     width: 28rem;
     cursor: pointer;
-    background-color: ${props => props.dark ? "#000" : ""};
+    background-color: ${props => props.dark==='dark' ? "#000" : "#fff"};
     @media screen and (max-width: 500px){
         width: 20rem;
     }
@@ -72,7 +72,7 @@ const StyledUserData = styled.div`
 const StyledUserName = styled.span`
     font-size: 1rem;
     font-weight: 700;
-    color: ${props => props.dark ? "#fff" : "#000"};
+    color: ${props => props.dark==='dark' ? "#fff" : "#000"};
 `
 const StyledUserId = styled.span`
     font-size: 1rem;
@@ -91,5 +91,5 @@ const StyledUserLikes = styled.div`
 const StyledLikeIcon = styled(HiOutlineThumbUp)`
     font-size: 1.8rem;
     margin-right: 0.5rem;
-    color: ${props => props.dark ? "#fff" : "#000"};
+    color: ${props => props.dark==='dark' ? "#fff" : "#000"};
 `

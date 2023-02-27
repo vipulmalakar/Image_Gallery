@@ -19,8 +19,8 @@ const Header = () => {
             <SearchIcon />
             <SearchInput value={searchValue} onChange={handleInputChange} type="text" placeholder="Search Images here" />
         </Search>
-        <StyledToggle className="gap-2" onClick={()=>setDark(!dark)} >
-            <StyledText dark={dark}>{dark?'Light':'Dark'} Mode</StyledText>
+        <StyledToggle className="gap-2" onClick={()=>setDark(dark==='light'?'dark':'light')} >
+            <StyledText dark={dark}>{dark==='dark'?'Light':'Dark'} Mode</StyledText>
             <StyledToggleIcon dark={dark}>
                 {dark ? <BsToggleOn /> : <BsToggleOff />}
             </StyledToggleIcon>
@@ -35,23 +35,17 @@ const StyledHeader = styled.header`
     display: flex;
     padding: 1rem 3rem;
     justify-content: space-between;
-    background-color: ${props => props.dark ? '#232323' : '#FFFFFF'};
+    background-color: ${props => props.dark==='dark' ? '#232323' : '#FFFFFF'};
     gap: 2rem;
     @media screen and (max-width: 768px) {
         flex-direction: column;
         padding: 1rem;
     }
 `
-const StyledContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-`
 const Logo = styled.h1`
     font-family: Pattaya;
     cursor: pointer;
-    color: ${props => props.dark ? '#FFFFFF' : '#000000'};
+    color: ${props => props.dark==='dark' ? '#FFFFFF' : '#000000'};
 `
 const Search = styled.div`
     margin: auto 0;
@@ -79,7 +73,7 @@ const SearchInput = styled.input`
 const StyledText = styled.span`
     font-weight: 700;
     cursor: pointer;
-    color: ${props => props.dark ? '#FFFFFF' : '#000000'};
+    color: ${props => props.dark==='dark' ? '#FFFFFF' : '#000000'};
 `
 const StyledToggle = styled.div`
     display: flex;
@@ -91,7 +85,10 @@ const StyledToggle = styled.div`
     }
 `
 const StyledToggleIcon = styled.div`
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
     cursor: pointer;
-    color: ${props => props.dark ? '#FFFFFF' : '#000000'};
+    color: ${props => props.dark==='dark' ? '#FFFFFF' : '#000000'};
+    rotate: ${props => props.dark==='dark' ? '180deg' : '0deg'};
 `

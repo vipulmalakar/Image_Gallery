@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Item from './Item';
 import { HiOutlineThumbUp } from "react-icons/hi";
 import { RxInstagramLogo, RxTwitterLogo } from "react-icons/rx";
-import { GrFormClose } from "react-icons/gr";
 import { AppContext } from "../App";
 
 const customStyles = {
@@ -59,19 +58,24 @@ const ImageModal = ({data}) => {
         contentLabel="Example Modal"
       >
        <StyledModal dark={dark}>
-        <StyledCloseIcon onClick={closeModal} />
-        <StyledItemImg src={data?.urls?.regular} alt="item" />
+        <StyledImageContainer>
+          <StyledItemImg src={data?.urls?.regular} alt="item" />
+        </StyledImageContainer>
         <StyledDetailsContainer className="gap-4">
           <StyledTopContainer>
-              <StyledUser className="gap-3">
-                <StyledProfileImg src={data?.user?.profile_image?.small} alt="img" />
-                <StyledUserData>
-                  <StyledUserName dark={dark}>{data?.user?.name}</StyledUserName>
-                  <StyledUserId>@{data?.user?.username}</StyledUserId>
-                </StyledUserData>
-                <StyledUserId><RxInstagramLogo /> {`${data?.user?.social?.instagram_username?'/'+data?.user?.social?.instagram_username:''}`}</StyledUserId>
-                <StyledUserId><RxTwitterLogo /> {`${data?.user?.social?.twitter_username?'/'+data?.user?.social?.twitter_username:''}`}</StyledUserId>
-              </StyledUser>
+              <StyledTopLeftContainer className="gap-3">
+                <StyledUser>
+                  <StyledProfileImg src={data?.user?.profile_image?.small} alt="img" />
+                  <StyledUserData>
+                    <StyledUserName dark={dark}>{data?.user?.name}</StyledUserName>
+                    <StyledUserId>@{data?.user?.username}</StyledUserId>
+                  </StyledUserData>
+                </StyledUser>
+                <StyledUser className="gap-3">
+                  <StyledUserId><RxInstagramLogo /> {`${data?.user?.social?.instagram_username?'/'+data?.user?.social?.instagram_username:''}`}</StyledUserId>
+                  <StyledUserId><RxTwitterLogo /> {`${data?.user?.social?.twitter_username?'/'+data?.user?.social?.twitter_username:''}`}</StyledUserId>
+                </StyledUser>
+              </StyledTopLeftContainer>
               <StyledUser className="gap-3">
                 <StyledUserName dark={dark}>1.2k downloads</StyledUserName>
                 <StyledUserLikes>
@@ -100,44 +104,39 @@ export default ImageModal;
 const StyledModal = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: ${props => props.dark ? '#232323' : '#fff'};
+    background-color: ${props => props.dark==='dark' ? '#232323' : '#fff'};
     @media screen and (max-width: 768px){
-        aspect-ratio: 1/0.8;
-        overflow-x: scroll;
-        width: 40rem;
+        aspect-ratio: 3/2;
     }
 `
-const StyledCloseIcon = styled(GrFormClose)`
-    position: absolute;
-    right: 0rem;
-    font-size: 2rem;
-    color: #000;
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 50%;
-    padding: 5px;
+const StyledImageContainer = styled.div`
+    overflow-x: scroll;
+    aspect-ratio: 3/1;
+    height: 25rem;
 `
 const StyledItemImg = styled.img`
-    height: 30rem;
-    @media screen and (max-width: 1024px){
-        height: 20rem;
-    }
-    @media screen and (max-width: 768px){
-        ${'' /* aspect-ratio: 3/2 */}
-    }
+    aspect-ratio: 3/1;
+    height: 100%;
 `
 const StyledDetailsContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
+    @media screen and (max-width: 768px){
+        align-items: center;
+    }
 `
 const StyledTopContainer = styled.div`
     display: flex;
     justify-content: space-between;
     @media screen and (max-width: 768px){
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 1rem;
     }
+`
+const StyledTopLeftContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
 `
 const StyledUser = styled.div`
     display: flex;
@@ -157,7 +156,7 @@ const StyledUserData = styled.div`
 const StyledUserName = styled.span`
     font-size: 1rem;
     font-weight: 700;
-    color: ${props => props.dark ? '#fff' : '#000'};
+    color: ${props => props.dark==='dark' ? '#fff' : '#000'};
 `
 const StyledUserId = styled.span`
     font-size: 1rem;
@@ -176,7 +175,7 @@ const StyledUserLikes = styled.div`
 const StyledLikeIcon = styled(HiOutlineThumbUp)`
     font-size: 1.8rem;
     margin-right: 0.5rem;
-    color: ${props => props.dark ? '#fff' : '#000'};
+    color: ${props => props.dark==='dark' ? '#fff' : '#000'};
 `
 const StyledBottomContainer = styled.div`
     display: flex;

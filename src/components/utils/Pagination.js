@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 import { AppContext } from "../../App";
 
-function Items({ currentItems, Component, Container }) {
+function Items({ currentItems, Component }) {
   return (
     <div className='d-flex flex-wrap justify-content-center w-100 p-5 gap-4'>
       {currentItems && currentItems.map((item, key) => 
@@ -12,7 +12,7 @@ function Items({ currentItems, Component, Container }) {
   );
 }
 
-function Pagination({ data, itemsPerPage, Component}) {
+function Pagination({ data, itemsPerPage, Component }) {
   const {dark} = useContext(AppContext);
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
@@ -33,7 +33,7 @@ function Pagination({ data, itemsPerPage, Component}) {
   };
 
   return (
-    <div style={{backgroundColor:`${dark?'#232322':''}`}}>
+    <div style={{backgroundColor:`${dark==='dark'?'#232322':''}`}}>
       <Items
         currentItems={currentItems}
         Component={Component}
