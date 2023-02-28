@@ -8,7 +8,7 @@ import {AppContext} from "../App";
 import Loading from "../components/Loading";
 
 const Home = () => {
-    const {response, isLoading} = useContext(AppContext);
+    const {dark, response, isLoading} = useContext(AppContext);
 
     return (
         <StyledHome>
@@ -18,6 +18,7 @@ const Home = () => {
                 isLoading ? <Loading /> :
                 <Pagination data={response} itemsPerPage={9} Component={ImageModal} />
             }
+            <StyledCopyRight dark={dark} >© Copyright 2023 Vipul Malakar. All rights reserved</StyledCopyRight>
         </StyledHome>
     );
 }
@@ -27,4 +28,11 @@ export default Home;
 const StyledHome = styled.div`
     display: flex;
     flex-direction: column;
+`
+const StyledCopyRight = styled.span`
+    text-align: center;
+    padding: 3rem 0 1rem 0;
+    background-color: ${props => props.dark==='dark' ? "#232323" : "#fff"};
+    color: ${props => props.dark==='dark' ? "#fff" : "#000"};
+    font-weight: 500;
 `
